@@ -46,9 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                     <a class="navbar-brand" runat="server" href="~/"> 
-                        <asp:Label ID="ServiceName" runat="server"></asp:Label>
-                     </a>
+                    <a class="navbar-brand" runat="server" href="~/">アプリケーション名</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -80,7 +78,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - <asp:Label ID="copyright" runat="server"></asp:Label></p>
+                <p>&copy; <%: DateTime.Now.Year %> - マイ ASP.NET アプリケーション</p>
             </footer>
         </div>
     </form>

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -19,24 +16,10 @@ namespace WebRoot
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
 
-        [DllImport("kernel32.dll", EntryPoint = "GetPrivateProfileStringW", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern uint GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, uint nSize, string lpFileName);
-        private String filePath { get; set; }
-
-
         protected void Page_Init(object sender, EventArgs e)
         {
             // 以下のコードは、XSRF 攻撃からの保護に役立ちます
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
-            this.filePath = AppDomain.CurrentDomain.BaseDirectory + "..\\ServiceEnv.ini";
-            int capacitySize = 256;
-            StringBuilder sb = new StringBuilder(capacitySize);
-            StringBuilder cpright= new StringBuilder(capacitySize);
-            uint ret = GetPrivateProfileString("ServiceStringConfig", "Servicename", "not read", sb, Convert.ToUInt32(sb.Capacity), this.filePath);
-            ServiceName.Text = sb.ToString();
-            uint ret_cp = GetPrivateProfileString("ServiceStringConfig", "Copyright", "not read", cpright, Convert.ToUInt32(sb.Capacity), this.filePath);
-            copyright.Text = cpright.ToString();
-            
             Guid requestCookieGuidValue;
             if (requestCookie != null && Guid.TryParse(requestCookie.Value, out requestCookieGuidValue))
             {
